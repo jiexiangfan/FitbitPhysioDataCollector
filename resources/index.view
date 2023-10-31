@@ -1,3 +1,4 @@
 <svg>
   <text id="display" x="20%" y="50%" class="display">App is running.</text>
+  <text id="heart" x="20%" y="60%" class="heart">Current heart rate: 58</text>
 </svg>
