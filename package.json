@@ -15,12 +15,12 @@
     "wipeColor": "#ffffff",
     "requestedPermissions": [
       "access_activity",
-      "access_aod",
       "access_exercise",
       "access_heart_rate",
       "access_internet",
       "access_location",
-      "run_background"
+      "run_background",
+      "access_accelerometer"
     ],
     "buildTargets": [
       "atlas",
