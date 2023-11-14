@@ -1,9 +1,18 @@
 import { HeartRateSensor } from "heart-rate";
 import { Accelerometer } from "accelerometer";
-import { Barometer } from "barometer";
 import { Gyroscope } from "gyroscope";
 import { OrientationSensor } from "orientation";
 import document from "document";
+import * as messaging from "messaging";
+
+// Function to send data to companion
+function sendData(data) {
+  if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+    messaging.peerSocket.send(data);
+  } else {
+    console.log("Connection is not open");
+  }
+}
 
 // Fetch UI element of heart rate
 let heartLabel = document.getElementById("heart");
@@ -29,36 +38,48 @@ function startSensor(Sensor, sensorName, frequency, callback) {
 
 // Start sensors
 hrSensor = startSensor(HeartRateSensor, "heart_rate", 1, () => {
-  console.log(
-    `Current heart rate: ${hrSensor.heartRate} [${hrSensor.timestamp}]`
-  );
+  // console.log(
+  //   `Current heart rate: ${hrSensor.heartRate} [${hrSensor.timestamp}]`
+  // );
   heartLabel.text = `Current heart rate: ${hrSensor.heartRate}`;
+  let data = {
+    type: "heartRate",
+    value: hrSensor.heartRate,
+    timestamp: hrSensor.timestamp,
+  };
+  sendData(data);
 });
 
 accelerometer = startSensor(Accelerometer, "accelerometer", 1, () => {
-  console.log(`Accelerometer Reading: \
-  ts: ${accelerometer.timestamp}, \
-  x: ${accelerometer.x}, \
-  y: ${accelerometer.y}, \
-  z: ${accelerometer.z}`);
+  let accelData = {
+    type: "accelerometer",
+    x: accelerometer.x,
+    y: accelerometer.y,
+    z: accelerometer.z,
+    timestamp: accelerometer.timestamp,
+  };
+  sendData(accelData);
 });
 
 gyroscope = startSensor(Gyroscope, "gyroscope", 1, () => {
-  console.log(`Gyroscope Reading: \
-  timestamp=${gyroscope.timestamp}, \
-  [${gyroscope.x}, \
-  ${gyroscope.y}, \
-  ${gyroscope.z}]`);
+  let gyroData = {
+    type: "gyroscope",
+    x: gyroscope.x,
+    y: gyroscope.y,
+    z: gyroscope.z,
+    timestamp: gyroscope.timestamp,
+  };
+  sendData(gyroData);
 });
 
+// orientation has max frequency of 60
 orientation = startSensor(OrientationSensor, "orientation", 1, () => {
-  // max frequency is 60
-  console.log(`Orientation Reading: \
-  timestamp=${orientation.timestamp}, \
-  [${orientation.quaternion[0]}, \
-  ${orientation.quaternion[1]}, \
-  ${orientation.quaternion[2]}, \
-  ${orientation.quaternion[3]}]`);
+  let orientationData = {
+    type: "orientation",
+    quaternion: orientation.quaternion,
+    timestamp: orientation.timestamp,
+  };
+  sendData(orientationData);
 });
 
 // Function to stop all sensors
@@ -68,30 +89,3 @@ function stopAllSensors() {
   gyroscope?.stop();
   orientation?.stop();
 }
-
-// // Function to start all sensors (if needed)
-// function startAllSensors() {
-//   hrSensor = startSensor(HeartRateSensor, "heart_rate", 1, () => {
-//     console.log(`Current heart rate: ${hrSensor.heartRate}`);
-//     heartLabel.text = `Current heart rate: ${hrSensor.heartRate}`;
-//   });
-
-//   accelerometer = startSensor(Accelerometer, "accelerometer", 1, () => {
-//     console.log(`Accel raw: ${accelerometer.readings}`);
-//   });
-
-//   barometer = startSensor(Barometer, "barometer", 1, () => {
-//     console.log(`Barometer pressure: ${barometer.pressure}`);
-//   });
-
-//   gyroscope = startSensor(Gyroscope, "gyroscope", 1, () => {
-//     console.log(`Gyro raw: ${gyroscope.readings}`);
-//   });
-
-//   orientation = startSensor(OrientationSensor, "orientation", 60, () => {
-//     console.log(`Orientation: ${orientation.quaternion}`);
-//   });
-// }
-
-// // Call startAllSensors to initialize sensor readings when app starts
-// startAllSensors();
