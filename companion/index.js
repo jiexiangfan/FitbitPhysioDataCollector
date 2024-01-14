@@ -1,7 +1,8 @@
 import * as messaging from "messaging";
 
-// Example server endpoint
-const SERVER_URL = "http://localhost:3000/api/data";
+// Server endpoint
+// const SERVER_URL = "http://localhost:3000/api/data";
+const SERVER_URL = "http://127.0.0.1:3000";
 
 function sendDataToServer(data) {
   fetch(SERVER_URL, {
