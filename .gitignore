@@ -146,4 +146,5 @@ dist
 # Ignore build folder
 build
 
+### macOS ###
 .DS_Store

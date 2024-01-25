@@ -1,4 +1,6 @@
 // util.js
+import { config } from "./config";
+
 export function sendDataToServer(serverUrl, data) {
   fetch(serverUrl, {
     method: "POST",
@@ -22,6 +24,7 @@ export function processSensorData(data) {
   switch (data.type) {
     case "heartRate":
       processedData = {
+        user: config.USER,
         type: "Heart Rate",
         value: data.value,
         timestamp: data.timestamp,
@@ -29,6 +32,7 @@ export function processSensorData(data) {
       break;
     case "accelerometer":
       processedData = {
+        user: config.USER,
         type: "Accelerometer",
         x: data.x,
         y: data.y,
@@ -38,6 +42,7 @@ export function processSensorData(data) {
       break;
     case "gyroscope":
       processedData = {
+        user: config.USER,
         type: "Gyroscope",
         x: data.x,
         y: data.y,
@@ -47,13 +52,18 @@ export function processSensorData(data) {
       break;
     case "orientation":
       processedData = {
+        user: config.USER,
         type: "Orientation",
         quaternion: data.quaternion,
         timestamp: data.timestamp,
       };
       break;
     default:
-      processedData = { type: "Unknown", message: "Unknown sensor data type" };
+      processedData = {
+        user: config.USER,
+        type: "Unknown",
+        message: "Unknown sensor data type",
+      };
   }
   return processedData;
 }

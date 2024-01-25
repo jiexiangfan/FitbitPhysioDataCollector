@@ -4,7 +4,7 @@ A Fitbit watch application that collects data from sensors and forward to local 
 
 ## Overview
 
-A simple Fitbit watch application built with [Fitbit SDK](https://dev.fitbit.com/), specifically for Fitbit Versa. The application is to achieve two major features listed below:
+A simple Fitbit watch application built with [Fitbit SDK](https://dev.fitbit.com/), specifically for Fitbit Sense. The application is to achieve two major features listed below:
 
 1. Collect physiological data of users (nursing students and teachers) as frequent as reasonable (1Hz). Sensors that can be accessed by this application are:
 
@@ -17,11 +17,12 @@ A simple Fitbit watch application built with [Fitbit SDK](https://dev.fitbit.com
 
 ## How to install
 
-To install this Fitbit application to Fitbit Versa, you'll need the following prerequisites/steps:
+To install this Fitbit application to Fitbit Sense, you'll need the following prerequisites/steps:
 
 - A Fitbit user account for each phone and watch pair (different Google accounts as Fitbit only accept sign in with Google since 2024)
 - Official Fitbit app installed on the paired Android phone
 - Same Fitbit account logged in to Fitbit app, Fitbit CLI (`logout` and do `npx fitbit` again to switch account)
+- Double check the user (students, teachers) and the IP address of data destination (Android local server) in `/companion/config.js`
 - Run `npx fitbit` in root directory
 - Run `bi` to build and install the Fitbit watch application
 
@@ -36,3 +37,5 @@ The `/companion` folder is the companion side-loaded in the official Fitbit mobi
 ## Configuration
 
 To change the targeted IP of the companion (the IP of the system which is receiving the sensor data), go `/companion/config.js` and edit `SERVER_URL`.
+
+To change the user of the device before students or teachers wearing the watch, go `/companion/config.js` and edit `USER`.

@@ -1,5 +1,5 @@
 {
-  "name": "teamwork-monitor-app",
+  "name": "fitbit-sensor-collector",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
@@ -10,7 +10,7 @@
   "fitbit": {
     "appUUID": "34219385-b834-45dd-93fd-7beb0a6c02ab",
     "appType": "app",
-    "appDisplayName": "Teamwork Monitor App",
+    "appDisplayName": "CoLAM Sensor Collector",
     "iconFile": "resources/icon.png",
     "wipeColor": "#ffffff",
     "requestedPermissions": [
