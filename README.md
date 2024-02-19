@@ -26,6 +26,13 @@ To install this Fitbit application to Fitbit Sense, you'll need the following pr
 - Run `npx fitbit` in root directory
 - Run `bi` to build and install the Fitbit watch application
 
+### Enable notification from teamwork-analysis-dashboard
+After installing this Fitbit application on the phone, follow the instructions on the repository of [android-fitbit-middleman](https://github.com/Teamwork-Analytics/android-fitbit-middleman) to install the Android app required. Then:
+- Go to the Fitbit app on the device
+- Navigate to the paired device (Fitbit watch), which is likely to be an icon located on the top left in the application home page.
+- Select the device and navigate to `General`>`Notifications`>`App Notification`.
+- Enable (tick) the notification for our Android app (System Fitbit Connector).
+
 ## File structure
 
 This Fitbit watch application consist of two components: `/app` and `/companion`.
