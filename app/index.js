@@ -29,16 +29,16 @@ hrSensor = startSensor(HeartRateSensor, "heart_rate", 1, () => {
   sendData(data);
 });
 
-accelerometer = startSensor(Accelerometer, "accelerometer", 1, () => {
-  let accelData = {
-    type: "accelerometer",
-    x: accelerometer.x,
-    y: accelerometer.y,
-    z: accelerometer.z,
-    timestamp: accelerometer.timestamp,
-  };
-  sendData(accelData);
-});
+// accelerometer = startSensor(Accelerometer, "accelerometer", 1, () => {
+//   let accelData = {
+//     type: "accelerometer",
+//     x: accelerometer.x,
+//     y: accelerometer.y,
+//     z: accelerometer.z,
+//     timestamp: accelerometer.timestamp,
+//   };
+//   sendData(accelData);
+// });
 
 // gyroscope = startSensor(Gyroscope, "gyroscope", 1, () => {
 //   let gyroData = {
